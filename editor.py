@@ -11,6 +11,7 @@ from menu import Menu
 from timer import Timer
 
 from random import choice, randint
+import pickle #new
 
 class Editor:
 	def __init__(self, land_tiles, switch):
@@ -146,6 +147,17 @@ class Editor:
 		for sprite in self.canvas_objects:
 			if sprite.rect.collidepoint(mouse_pos()):
 				return sprite
+			
+
+	def save_grid_to_file(self,level_name='level_1'): #new
+		path=f'levels/{level_name}.game'              #new
+		with open(path,'wb') as f:                    #new
+			pickle.dump(self.canvas_data,f)           #new
+
+	def load_grid_from_file(self,level_name='level_1'):  #new
+		path=f'levels/{level_name}.game'                 #new
+		with open(path,'rb') as f:                       #new
+			self.canvas_data=pickle.load(f)              #new
 
 	def create_grid(self):
 		
@@ -214,6 +226,7 @@ class Editor:
 				sys.exit()
 			if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
 				self.switch(self.create_grid())
+				self.save_grid_to_file()  #new
 				self.editor_music.stop()
 			
 			self.pan_input(event)
