@@ -94,13 +94,14 @@ class Level:
 						Block(pos, (76,50), self.collision_sprites)
 					case 12: 
 						Animated(asset_dict['palms']['large_fg'], pos, self.all_sprites)
-						Block(pos, (76,50), self.collision_sprites)
+						#Block(pos, (76,50), self.collision_sprites)
 					case 13: 
 						Animated(asset_dict['palms']['left_fg'], pos, self.all_sprites)
-						Block(pos, (76,50), self.collision_sprites)
+						Block(pos, (42,32), self.collision_sprites)
 					case 14: 
 						Animated(asset_dict['palms']['right_fg'], pos, self.all_sprites)
-						Block(pos + vector(50,0), (76,50), self.collision_sprites)
+						Block(pos, (64,64), self.collision_sprites)
+						#Block(pos + vector(50,0), (76,50), self.collision_sprites)
 					
 					case 15: Animated(asset_dict['palms']['small_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
 					case 16: Animated(asset_dict['palms']['large_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])

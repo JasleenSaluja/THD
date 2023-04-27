@@ -90,7 +90,7 @@ class Tooth(Generic):
 		self.direction = vector(choice((1,-1)),0)
 		self.orientation = 'left' if self.direction.x < 0 else 'right'
 		self.pos = vector(self.rect.topleft)
-		self.speed = 120
+		self.speed = 70
 		self.collision_sprites = collision_sprites
 
 		# destory tooth at the beginning if he is not on a floor
@@ -224,7 +224,7 @@ class Player(Generic):
 
 		# collision
 		self.collision_sprites = collision_sprites
-		self.hitbox = self.rect.inflate(-50,0)
+		self.hitbox = self.rect.inflate(0,0)
 
 		# timer 
 		self.invul_timer = Timer(200)
