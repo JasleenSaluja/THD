@@ -2,7 +2,7 @@ import pygame
 from pygame.math import Vector2 as vector
 from settings import *
 from support import *
-
+from transition import Transition
 from pygame.image import load
 
 from editor import Editor
@@ -10,10 +10,14 @@ from level import Level
 
 from os import walk
 
+from GameMenu import GameMenu
+from GameLaunch import GameLaunch
+
 class Main:
 	def __init__(self):
 		pygame.init()
 		self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+		pygame.display.set_caption('The Hungry Dead')
 		self.clock = pygame.time.Clock()
 		self.imports()
 
@@ -100,31 +104,9 @@ class Main:
 			pygame.display.update()
 
 
-class Transition:
-	def __init__(self, toggle):
-		self.display_surface = pygame.display.get_surface()
-		self.toggle = toggle
-		self.active = False
-
-		self.border_width = 0
-		self.direction = 1
-		self.center = (WINDOW_WIDTH /2, WINDOW_HEIGHT / 2)
-		self.radius = vector(self.center).magnitude()
-		self.threshold = self.radius + 100
-
-	def display(self, dt):
-		if self.active:
-			self.border_width += 1000 * dt * self.direction
-			if self.border_width >= self.threshold:
-				self.direction = -1
-				self.toggle()
-			
-			if self.border_width < 0:
-				self.active = False
-				self.border_width = 0
-				self.direction = 1
-			pygame.draw.circle(self.display_surface, 'black',self.center, self.radius, int(self.border_width))
 
 if __name__ == '__main__':
+	GameLaunch().run()
+	GameMenu().run()
 	main = Main()
 	main.run() 
