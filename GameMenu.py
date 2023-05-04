@@ -26,6 +26,11 @@ class GameMenu:
         cursor = pygame.cursors.Cursor((0,0), surf)
         pygame.mouse.set_cursor(cursor)
 
+        #music
+        self.gamelaunch_music = pygame.mixer.Sound('audio/gamelaunch.ogg')
+        self.gamelaunch_music.set_volume(1.0)
+        self.gamelaunch_music.play(loops = -1)
+
     def imports(self):
         # terrain
         self.land_tiles = import_folder_dict('graphics/terrain/land_1')
@@ -37,11 +42,6 @@ class GameMenu:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-
-            # play_button_surf=pygame.image.load('graphics/buttons/play_button.png')
-            # self.display_surface.blit(play_button_surf, (282,433))
-            # edit_button_surf=pygame.image.load('graphics/buttons/edit_button.png')
-            # self.display_surface.blit(edit_button_surf, (692,433))
 
 
             # if event.type==pygame.MOUSEBUTTONDOWN:

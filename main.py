@@ -12,6 +12,7 @@ from os import walk
 
 from GameMenu import GameMenu
 from GameLaunch import GameLaunch
+from GameLevels import GameLevels
 
 class Main:
 	def __init__(self):
@@ -106,7 +107,8 @@ class Main:
 
 
 if __name__ == '__main__':
-	GameLaunch().run()
-	GameMenu().run()
+	#GameLaunch().run()
+	#GameMenu().run()
+	#GameLevels().run()
 	main = Main()
 	main.run() 

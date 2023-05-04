@@ -9,7 +9,7 @@ from level import Level
 from os import walk
 
 # a screen to display all the levels
-class GameLaunch:
+class GameLevels:
     def __init__(self, toggle=False):
         pygame.init()
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))

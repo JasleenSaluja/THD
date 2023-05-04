@@ -1,5 +1,6 @@
 import pygame
 from pygame.math import Vector2 as vector
+from pygame.image import load
 
 from settings import *
 from timer import Timer
@@ -220,7 +221,7 @@ class Player(Generic):
 		self.direction = vector()
 		self.pos = vector(self.rect.center)
 		self.speed = 300
-		self.gravity = 4
+		self.gravity = 5
 		self.on_floor = False
 
 		# collision
@@ -235,10 +236,11 @@ class Player(Generic):
 		self.jump_sound.set_volume(0.2)
 
 	def damage(self):
-		if not self.invul_timer.active:
+		if not self.invul_timer.active:  
 			self.invul_timer.activate()
 			self.direction.y -= 1.5
 
+		
 	def get_status(self):
 		if self.direction.y < 0:
 			self.status = 'jump'
@@ -253,6 +255,11 @@ class Player(Generic):
 		self.frame_index = 0 if self.frame_index >= len(current_animation) else self.frame_index
 		self.image = current_animation[int(self.frame_index)]
 		self.mask = pygame.mask.from_surface(self.image)
+
+		# if self.invul_timer.active:
+		# 	surf = import_folder('graphics/player_1/dead_right')
+		# 	#surf.set_colorkey('black')
+		# 	self.image = surf
 
 		if self.invul_timer.active:
 			surf = self.mask.to_surface()

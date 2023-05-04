@@ -35,6 +35,10 @@ class Level:
 		pygame.time.set_timer(self.cloud_timer, 2000)
 		self.startup_clouds()
 
+
+		#font
+		self.test_font=pygame.font.SysFont('bruno ace',30)
+
 		# sounds 
 		self.bg_music = audio['music']
 		self.bg_music.set_volume(1.0)
@@ -147,12 +151,25 @@ class Level:
 			y = self.horizon_y - randint(-50,600)
 			Cloud((x,y), surf, self.all_sprites, self.level_limits['left'])
 
+
+
+	#display time not working though ther is no error
+	def display_time(self):
+		current_time=int(pygame.time.get_ticks()/10)
+		score_surf=self.test_font.render( f'{current_time}',False,'white')
+		score_rect=score_surf.get_rect(center=(45,45))
+		self.display_surface.blit(score_surf,score_rect)
+		
+
+
+
 	def run(self, dt):
 		# update
 		self.event_loop()
 		self.all_sprites.update(dt)
 		self.get_coins()
 		self.get_damage()
+		self.display_time()
 
 		# drawing
 		self.display_surface.fill(SKY_COLOR)
