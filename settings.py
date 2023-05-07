@@ -21,15 +21,15 @@ EDITOR_DATA = {
 	9:  {'style': 'enemy', 'type': 'tile', 'menu': 'enemy', 'menu_surf': 'graphics/menu/shell_left.png',  'preview': 'graphics/preview/shell_left.png',  'graphics': 'graphics/enemies/shell_left/idle'},
 	10: {'style': 'enemy', 'type': 'tile', 'menu': 'enemy', 'menu_surf': 'graphics/menu/shell_right.png', 'preview': 'graphics/preview/shell_right.png', 'graphics': 'graphics/enemies/shell_right/idle'},
 	
-	11: {'style': 'palm_fg', 'type': 'object', 'menu': 'palm fg', 'menu_surf': 'graphics/menu/small_fg.png', 'preview': 'graphics/preview/small_fg.png', 'graphics': 'graphics/terrain/palm/small_fg'},
-	12: {'style': 'palm_fg', 'type': 'object', 'menu': 'palm fg', 'menu_surf': 'graphics/menu/large_fg.png', 'preview': 'graphics/preview/large_fg.png', 'graphics': 'graphics/terrain/palm/large_fg'},
-	13: {'style': 'palm_fg', 'type': 'object', 'menu': 'palm fg', 'menu_surf': 'graphics/menu/left_fg.png',  'preview': 'graphics/preview/left_fg.png',  'graphics': 'graphics/terrain/palm/left_fg'},
-	14: {'style': 'palm_fg', 'type': 'object', 'menu': 'palm fg', 'menu_surf': 'graphics/menu/right_fg.png', 'preview': 'graphics/preview/right_fg.png', 'graphics': 'graphics/terrain/palm/right_fg'},
+	11: {'style': 'palm_fg', 'type': 'object', 'menu': 'palm fg', 'menu_surf': 'graphics/menu/small_fg.png', 'preview': 'graphics/preview/small_fg.png', 'graphics': 'graphics/terrain/obstacles/small_fg'},
+	12: {'style': 'palm_fg', 'type': 'object', 'menu': 'palm fg', 'menu_surf': 'graphics/menu/tree.png', 'preview': 'graphics/preview/tree.png', 'graphics': 'graphics/terrain/obstacles/tree'},
+	13: {'style': 'palm_fg', 'type': 'object', 'menu': 'palm fg', 'menu_surf': 'graphics/menu/skeleton.png',  'preview': 'graphics/preview/skeleton.png',  'graphics': 'graphics/terrain/obstacles/skeleton'},
+	14: {'style': 'palm_fg', 'type': 'object', 'menu': 'palm fg', 'menu_surf': 'graphics/menu/crate.png', 'preview': 'graphics/preview/crate.png', 'graphics': 'graphics/terrain/obstacles/crate'},
 
-	15: {'style': 'palm_bg', 'type': 'object', 'menu': 'palm bg', 'menu_surf': 'graphics/menu/small_bg.png', 'preview': 'graphics/preview/small_bg.png', 'graphics': 'graphics/terrain/palm/small_bg'},
-	16: {'style': 'palm_bg', 'type': 'object', 'menu': 'palm bg', 'menu_surf': 'graphics/menu/large_bg.png', 'preview': 'graphics/preview/large_bg.png', 'graphics': 'graphics/terrain/palm/large_bg'},
-	17: {'style': 'palm_bg', 'type': 'object', 'menu': 'palm bg', 'menu_surf': 'graphics/menu/left_bg.png',  'preview': 'graphics/preview/left_bg.png',  'graphics': 'graphics/terrain/palm/left_bg'},
-	18: {'style': 'palm_bg', 'type': 'object', 'menu': 'palm bg', 'menu_surf': 'graphics/menu/right_bg.png', 'preview': 'graphics/preview/right_bg.png', 'graphics': 'graphics/terrain/palm/right_bg'},
+	15: {'style': 'obstacle', 'type': 'object', 'menu': 'obstacle', 'menu_surf': 'graphics/menu/small_bg.png', 'preview': 'graphics/preview/small_bg.png', 'graphics': 'graphics/terrain/obstacles/small_bg'},
+	16: {'style': 'obstacle', 'type': 'object', 'menu': 'obstacle', 'menu_surf': 'graphics/menu/large_bg.png', 'preview': 'graphics/preview/large_bg.png', 'graphics': 'graphics/terrain/obstacles/large_bg'},
+	17: {'style': 'obstacle', 'type': 'object', 'menu': 'obstacle', 'menu_surf': 'graphics/menu/left_bg.png',  'preview': 'graphics/preview/left_bg.png',  'graphics': 'graphics/terrain/obstacles/left_bg'},
+	18: {'style': 'obstacle', 'type': 'object', 'menu': 'obstacle', 'menu_surf': 'graphics/menu/right_bg.png', 'preview': 'graphics/preview/right_bg.png', 'graphics': 'graphics/terrain/obstacles/right_bg'},
 }
 
 NEIGHBOR_DIRECTIONS = {

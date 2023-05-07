@@ -44,7 +44,7 @@ class Main:
         self.particle = import_folder('graphics/items/particle')
 
         # palm trees
-        self.palms = {folder: import_folder(f'graphics/terrain/palm/{folder}') for folder in list(walk('graphics/terrain/palm'))[0][1]}
+        self.obstacles = {folder: import_folder(f'graphics/terrain/obstacles/{folder}') for folder in list(walk('graphics/terrain/obstacles'))[0][1]}
 
         # enemies
         self.spikes = load('graphics/enemies/spikes/spikes.png').convert_alpha()
@@ -84,7 +84,7 @@ class Main:
                     'silver': self.silver,
                     'diamond': self.diamond,
                     'particle': self.particle,
-                    'palms': self.palms,
+                    'obstacles': self.obstacles,
                     'spikes': self.spikes,
                     'zombie': self.zombie,
                     'shell': self.shell,

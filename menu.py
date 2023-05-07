@@ -38,7 +38,7 @@ class Menu:
 		Button(self.tile_button_rect, self.buttons, self.menu_surfs['terrain'])
 		Button(self.coin_button_rect, self.buttons, self.menu_surfs['coin'])
 		Button(self.enemy_button_rect, self.buttons, self.menu_surfs['enemy'])
-		Button(self.palm_button_rect, self.buttons, self.menu_surfs['palm fg'], self.menu_surfs['palm bg'])
+		Button(self.palm_button_rect, self.buttons, self.menu_surfs['palm fg'], self.menu_surfs['obstacle'])
 
 	def click(self, mouse_pos, mouse_button):
 		for sprite in self.buttons:
@@ -57,7 +57,7 @@ class Menu:
 			pygame.draw.rect(self.display_surface, BUTTON_LINE_COLOR, self.coin_button_rect.inflate(4,4),5,4)
 		if EDITOR_DATA[index]['menu'] == 'enemy':
 			pygame.draw.rect(self.display_surface, BUTTON_LINE_COLOR, self.enemy_button_rect.inflate(4,4),5,4)
-		if EDITOR_DATA[index]['menu'] in ('palm bg', 'palm fg'):
+		if EDITOR_DATA[index]['menu'] in ('obstacle', 'palm fg'):
 			pygame.draw.rect(self.display_surface, BUTTON_LINE_COLOR, self.palm_button_rect.inflate(4,4),5,4)
 
 	def display(self, index):

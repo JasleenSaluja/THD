@@ -178,7 +178,7 @@ class Editor:
 		# create an empty grid
 		layers = {
 			'water': {},
-			'bg palms': {},
+			'obstacle': {},
 			'terrain': {}, 
 			'enemies': {},
 			'coins': {}, 
@@ -210,8 +210,8 @@ class Editor:
 
 			if tile.objects: # (obj, offset)
 				for obj, offset in tile.objects:
-					if obj in [key for key, value in EDITOR_DATA.items() if value['style'] == 'palm_bg']: # bg palm
-						layers['bg palms'][(int(x + offset.x), int(y + offset.y))] = obj
+					if obj in [key for key, value in EDITOR_DATA.items() if value['style'] == 'obstacle']: # bg palm
+						layers['obstacle'][(int(x + offset.x), int(y + offset.y))] = obj
 					else: # fg objects
 						layers['fg objects'][(int(x + offset.x), int(y + offset.y))] = obj
 
@@ -295,7 +295,7 @@ class Editor:
 					self.last_selected_cell = current_cell
 			else: # object
 				if not self.object_timer.active:
-					groups = [self.canvas_objects, self.background] if EDITOR_DATA[self.selection_index]['style'] == 'palm_bg' else [self.canvas_objects, self.foreground]
+					groups = [self.canvas_objects, self.background] if EDITOR_DATA[self.selection_index]['style'] == 'obstacle' else [self.canvas_objects, self.foreground]
 					CanvasObject(
 						pos = mouse_pos(),
 						frames = self.animations[self.selection_index]['frames'],
