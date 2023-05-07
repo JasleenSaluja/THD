@@ -13,7 +13,7 @@ from timer import Timer
 from random import choice, randint
 import pickle #new
 
-class Launcher():
+class GameMenu():
     def __init__(self):
         self.display_surface = pygame.display.get_surface()
         self.canvas_data = {}
@@ -49,13 +49,13 @@ class Launcher():
     def run(self):
         self.launcher_music.play(loops=-1)
         while True:
-            self.events()
+            self.events(play_button=self.play_button,edit_button=self.edit_button)
             self.update()
             self.draw()
             pygame.display.update()
             #self.clock.tick(ANIMATION_SPEED)
     
-    def events(self):
+    def events(self,play_button,edit_button):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -70,16 +70,18 @@ class Launcher():
             #         self.play_button_pressed = False
         
         # if self.play_button_pressed:
-        #     self.launcher_music.stop()
         #     self.play_button_pressed = False
         #     self.play_button_hover = False
         #     self.play_button_pressed = False
+
+        
     
     def update(self):
         self.mouse_pos = mouse_pos()
         # self.play_button_hover = self.play_button_rect.collidepoint(self.mouse_pos)
         # self.edit_button_hover = self.edit_button_rect.collidepoint(self.mouse_pos)
-        
+       
+
 
         if self.play_button_hover:
             self.play_button = self.play_button_hover
@@ -105,7 +107,7 @@ if __name__ == '__main__':
     pygame.init()
     pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     pygame.display.set_caption('Launcher')
-    Launcher().run()
+    GameMenu().run()
     pygame.quit()
     sys.exit()
 

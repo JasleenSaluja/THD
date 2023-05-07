@@ -249,6 +249,8 @@ class Player(Generic):
 		else:
 			self.status = 'run' if self.direction.x != 0 else 'idle'
 
+	
+
 	def animate(self, dt):
 		current_animation = self.animation_frames[f'{self.status}_{self.orientation}']
 		self.frame_index += ANIMATION_SPEED * dt

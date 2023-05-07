@@ -7,6 +7,7 @@ from support import *
 from sprites import Generic, Block, Animated, Particle, Coin, Player, Spikes, Tooth, Shell, Cloud
 
 from random import choice, randint
+from GameMenu import GameMenu
 
 class Level:
 	def __init__(self, grid, switch, asset_dict, audio):
@@ -126,6 +127,12 @@ class Level:
 		if collision_sprites:
 			self.hit_sound.play()
 			self.player.damage()
+			#pygame.quit()
+			#GameOver(self.screen, self.test_font, self.bg_music)
+
+
+			
+
 
 	def event_loop(self):
 		for event in pygame.event.get():
@@ -152,24 +159,12 @@ class Level:
 			Cloud((x,y), surf, self.all_sprites, self.level_limits['left'])
 
 
-
-	#display time not working though ther is no error
-	def display_time(self):
-		current_time=int(pygame.time.get_ticks()/10)
-		score_surf=self.test_font.render( f'{current_time}',False,'white')
-		score_rect=score_surf.get_rect(center=(45,45))
-		self.display_surface.blit(score_surf,score_rect)
-		
-
-
-
 	def run(self, dt):
 		# update
 		self.event_loop()
 		self.all_sprites.update(dt)
 		self.get_coins()
 		self.get_damage()
-		self.display_time()
 
 		# drawing
 		self.display_surface.fill(SKY_COLOR)
