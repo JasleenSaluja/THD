@@ -4,7 +4,7 @@ from pygame.math import Vector2 as vector
 from settings import *
 from support import *
 
-from sprites import Generic, Block, Animated, Particle, Coin, Player, Spikes, Tooth, Shell, Cloud
+from sprites import Generic, Block, Animated, Particle, Coin, Player, Spikes, Zombie, Shell, Cloud
 
 from random import choice, randint
 from GameMenu import GameMenu
@@ -75,7 +75,7 @@ class Level:
 					# enemies
 					case 7: Spikes(asset_dict['spikes'], pos, [self.all_sprites, self.damage_sprites])
 					case 8: 
-						Tooth(asset_dict['tooth'], pos, [self.all_sprites, self.damage_sprites], self.collision_sprites)
+						Zombie(asset_dict['zombie'], pos, [self.all_sprites, self.damage_sprites], self.collision_sprites)
 					case 9: 
 						Shell(
 							orientation = 'left', 

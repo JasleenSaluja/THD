@@ -75,7 +75,7 @@ class Spikes(Generic):
 		super().__init__(pos, surf, group)
 		self.mask = pygame.mask.from_surface(self.image)
 
-class Tooth(Generic):
+class Zombie(Generic):
 	def __init__(self, assets, pos, group, collision_sprites):
 
 		# general setup

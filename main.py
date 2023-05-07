@@ -48,7 +48,7 @@ class Main:
 
         # enemies
         self.spikes = load('graphics/enemies/spikes/spikes.png').convert_alpha()
-        self.tooth = {folder: import_folder(f'graphics/enemies/zombie/{folder}') for folder in list(walk('graphics/enemies/zombie'))[0][1]}
+        self.zombie = {folder: import_folder(f'graphics/enemies/zombie/{folder}') for folder in list(walk('graphics/enemies/zombie'))[0][1]}
         self.shell = {folder: import_folder(f'graphics/enemies/shell_left/{folder}') for folder in list(walk('graphics/enemies/shell_left/'))[0][1]}
         self.pearl = load('graphics/enemies/pearl/pearl.png').convert_alpha()
 
@@ -86,7 +86,7 @@ class Main:
                     'particle': self.particle,
                     'palms': self.palms,
                     'spikes': self.spikes,
-                    'tooth': self.tooth,
+                    'zombie': self.zombie,
                     'shell': self.shell,
                     'player': self.player_graphics,
                     'pearl': self.pearl,
