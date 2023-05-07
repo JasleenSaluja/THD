@@ -8,6 +8,7 @@ from level import Level
 
 from os import walk
 
+
 # a screen to display all the levels
 class GameLevels:
     def __init__(self, toggle=False):
@@ -40,4 +41,4 @@ class GameLevels:
 
 
 if __name__ == '__main__':
-    GameLaunch().run()
+    GameLevels().run()

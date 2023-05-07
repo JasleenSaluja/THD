@@ -257,7 +257,7 @@ class Player(Generic):
 		self.mask = pygame.mask.from_surface(self.image)
 
 		# if self.invul_timer.active:
-		# 	surf = import_folder('graphics/player_1/dead_right')
+		# 	surf = load('graphics/player_1/dead_right/dead__008.png')
 		# 	#surf.set_colorkey('black')
 		# 	self.image = surf
 
