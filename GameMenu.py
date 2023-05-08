@@ -117,8 +117,8 @@ class GameMenu:
         self.play_button_rect = self.display_surface.blit(self.play_button, (282,433))
         self.edit_button_rect = self.display_surface.blit(self.edit_button, (692,433))
         
-        pygame.draw.rect(self.display_surface, (255,0,0), self.play_button_rect, 1)
-        pygame.draw.rect(self.display_surface, (255,0,0), self.edit_button_rect, 1)
+        # pygame.draw.rect(self.display_surface, (255,0,0), self.play_button_rect, 1)
+        # pygame.draw.rect(self.display_surface, (255,0,0), self.edit_button_rect, 1)
 
 
 if __name__ == '__main__':

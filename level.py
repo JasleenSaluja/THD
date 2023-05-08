@@ -124,6 +124,7 @@ class Level:
 			self.player.damage()
 			self.player.kill()
 			#pygame.quit()
+			#exit()
 
 	def event_loop(self):
 		for event in pygame.event.get():

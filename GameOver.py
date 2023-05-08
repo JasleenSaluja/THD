@@ -13,7 +13,7 @@ from timer import Timer
 from random import choice, randint
 import pickle #new
 
-class GameLevels:
+class GameOver:
     def __init__(self, screen_num=2, switch=None):
         self.screen_num = screen_num
         self.display_surface = pygame.display.get_surface()
@@ -35,39 +35,54 @@ class GameLevels:
         
     def imports(self):
         #background
-        self.background_2=load('graphics/screen_3.png').convert_alpha()
+        self.background_4=load('graphics/gameover_screen.png').convert_alpha()
 
-        #level button
-        self.level_button=load('graphics/buttons/level_button.png').convert_alpha()
-        self.level_button_rect=self.level_button.get_rect(center=(282,433))
+        #replay button
+        self.replay_button=load('graphics/buttons/replay_button.png').convert_alpha()
+        self.replay_button_rect=self.replay_button.get_rect(center=(282,433))
         
        
 
-       
+       #level menu button
+        self.level_menu_button=load('graphics/buttons/level_menu_button.png').convert_alpha()
+        self.level_menu_button_rect=self.level_menu_button.get_rect(center=(692,433))
+        
         
     def click(self):
         # print(mouse_pos())
         #play button
-        if self.level_button_rect.collidepoint(mouse_pos()):
+        if self.replay_button_rect.collidepoint(mouse_pos()):
             if pygame.mouse.get_pressed()[0]:
                 self.pressed=True
             else:
                 if self.pressed==True:
                     print('click')
                     self.pressed=False
+            
+
+        #edit button
+        if self.level_menu_button_rect.collidepoint(mouse_pos()):
+            if pygame.mouse.get_pressed()[0]:
+                self.pressed=True
+            else:
+                if self.pressed==True:
+                    print('click')
+                    self.pressed=False
+
+
         
 
     def run(self, dt):
         self.launcher_music.play(loops=-1)
         while True:
-            self.events(level_button=self.level_button)
+            self.events(replay_button=self.replay_button,level_menu_button=self.level_menu_button)
             self.update()
             self.draw()
             self.click()
             pygame.display.update()
             #self.clock.tick(ANIMATION_SPEED)
     
-    def events(self,level_button,):
+    def events(self,replay_button,level_menu_button):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -91,16 +106,15 @@ class GameLevels:
         
 
     def draw(self):
-        self.display_surface.blit(self.background_2, (0,0))
-        self.level_button_rect = self.display_surface.blit(self.level_button, (107,204))
-        
-        #pygame.draw.rect(self.display_surface, (255,0,0), self.level_button_rect, 1)
+        self.display_surface.blit(self.background_4, (0,0))
+        self.replay_button_rect = self.display_surface.blit(self.replay_button, (511,464))
+        self.level_menu_button_rect = self.display_surface.blit(self.level_menu_button, (676,464))
 
 
 if __name__ == '__main__':
     # test the launcher
     pygame.init()
     pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-    GameLevels().run(dt=0)
+    GameOver().run(dt=0)
     pygame.quit()
     sys.exit()
