@@ -104,37 +104,12 @@ class GameMenu:
                 print(self.mouse_pos)
                 
 
-            # if event.type == pygame.MOUSEBUTTONDOWN:
-            #     if event.button == 1:
-            #         self.play_button_pressed = True
-
-            # if event.type == pygame.MOUSEBUTTONUP:
-            #     if event.button == 1:
-            #         self.play_button_pressed = False
-        
-        # if self.play_button_pressed:
-        #     self.play_button_pressed = False
-        #     self.play_button_hover = False
-        #     self.play_button_pressed = False
-
+           
         
     
     def update(self):
         self.mouse_pos = mouse_pos()
-        # self.play_button_hover = self.play_button_rect.collidepoint(self.mouse_pos)
-        # self.edit_button_hover = self.edit_button_rect.collidepoint(self.mouse_pos)
-       
-
-
-        # if self.play_button_hover:
-        #     self.play_button = self.play_button_hover
-        # else:
-        #     self.play_button = self.play_button
-
-        # if self.edit_button_hover:
-        #     self.edit_button = self.edit_button_hover
-        # else:
-        #     self.edit_button = self.edit_button
+        
 
     def draw(self):
         self.display_surface.blit(self.background_2, (0,0))
