@@ -73,7 +73,6 @@ class GameMenu:
             else:
                 if self.pressed==True:
                     print('click')
-
                     self.pressed=False
 
 
