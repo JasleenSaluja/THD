@@ -60,7 +60,6 @@ class GameMenu:
                 self.pressed=True
             else:
                 if self.pressed==True:
-                    #self.play_button_rect = self.display_surface.blit(self.play_button_pressed, (282,433))
                     print('click')
                     self.pressed=False
             
@@ -73,9 +72,8 @@ class GameMenu:
                 self.pressed=True
             else:
                 if self.pressed==True:
-                    #self.edit_button_rect = self.display_surface.blit(self.edit_button_pressed, (282,433))
                     print('click')
-                    
+
                     self.pressed=False
 
 
