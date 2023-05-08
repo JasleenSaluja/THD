@@ -7,7 +7,6 @@ from support import *
 from sprites import Generic, Block, Animated, Particle, Coin, Player, Spikes, Zombie, Shell, Cloud
 
 from random import choice, randint
-from GameMenu import GameMenu
 
 class Level:
 	def __init__(self, grid, switch, asset_dict, audio):
@@ -35,10 +34,6 @@ class Level:
 		self.cloud_timer = pygame.USEREVENT + 2
 		pygame.time.set_timer(self.cloud_timer, 2000)
 		self.startup_clouds()
-
-
-		#font
-		#self.test_font=pygame.font.SysFont('bruno ace',30)
 
 		# sounds 
 		self.bg_music = audio['music']
@@ -95,23 +90,23 @@ class Level:
 
 					# palm trees
 					case 11: 
-						Animated(asset_dict['obstacles']['small_fg'], pos, self.all_sprites)
+						Animated(asset_dict['palms']['small_fg'], pos, self.all_sprites)
 						Block(pos, (76,50), self.collision_sprites)
 					case 12: 
-						Animated(asset_dict['obstacles']['tree'], pos, self.all_sprites)
+						Animated(asset_dict['palms']['large_fg'], pos, self.all_sprites)
 						#Block(pos, (76,50), self.collision_sprites)
 					case 13: 
-						Animated(asset_dict['obstacles']['skeleton'], pos, self.all_sprites)
+						Animated(asset_dict['palms']['left_fg'], pos, self.all_sprites)
 						Block(pos, (42,32), self.collision_sprites)
 					case 14: 
-						Animated(asset_dict['obstacles']['crate'], pos, self.all_sprites)
+						Animated(asset_dict['palms']['right_fg'], pos, self.all_sprites)
 						Block(pos, (64,64), self.collision_sprites)
 						#Block(pos + vector(50,0), (76,50), self.collision_sprites)
 					
-					case 15: Animated(asset_dict['obstacles']['small_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
-					case 16: Animated(asset_dict['obstacles']['large_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
-					case 17: Animated(asset_dict['obstacles']['left_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
-					case 18: Animated(asset_dict['obstacles']['right_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
+					case 15: Animated(asset_dict['palms']['small_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
+					case 16: Animated(asset_dict['palms']['large_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
+					case 17: Animated(asset_dict['palms']['left_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
+					case 18: Animated(asset_dict['palms']['right_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
 
 		for sprite in self.shell_sprites:
 			sprite.player = self.player
@@ -127,12 +122,8 @@ class Level:
 		if collision_sprites:
 			self.hit_sound.play()
 			self.player.damage()
+			self.player.kill()
 			#pygame.quit()
-			#GameOver(self.screen, self.test_font, self.bg_music)
-
-
-			
-
 
 	def event_loop(self):
 		for event in pygame.event.get():
@@ -157,7 +148,6 @@ class Level:
 			x = randint(self.level_limits['left'], self.level_limits['right'])
 			y = self.horizon_y - randint(-50,600)
 			Cloud((x,y), surf, self.all_sprites, self.level_limits['left'])
-
 
 	def run(self, dt):
 		# update

@@ -13,12 +13,13 @@ from timer import Timer
 from random import choice, randint
 import pickle #new
 
-class GameMenu():
-    def __init__(self):
+class GameMenu:
+    def __init__(self, screen_num=2, switch=None):
+        self.screen_num = screen_num
         self.display_surface = pygame.display.get_surface()
         self.canvas_data = {}
         self.imports()
-
+        self.switch= switch
         self.play_button_pressed = False
 
         # add cursor
@@ -46,7 +47,7 @@ class GameMenu():
         #self.edit_button_rect=self.edit_button.get_rect(center=(692,433))
 
 
-    def run(self):
+    def run(self, dt):
         self.launcher_music.play(loops=-1)
         while True:
             self.events(play_button=self.play_button,edit_button=self.edit_button)
@@ -60,6 +61,16 @@ class GameMenu():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    if self.play_button_rect.collidepoint(self.mouse_pos):
+                        self.launcher_music.stop()
+                        self.switch()
+                    elif self.edit_button_rect.collidepoint(self.mouse_pos):
+                        self.launcher_music.stop()
+                        self.switch()
+                print(self.mouse_pos)
+                
 
             # if event.type == pygame.MOUSEBUTTONDOWN:
             #     if event.button == 1:
@@ -110,4 +121,3 @@ if __name__ == '__main__':
     GameMenu().run()
     pygame.quit()
     sys.exit()
-

@@ -14,12 +14,14 @@ from random import choice, randint
 import pickle #new
 
 class Launcher():
-    def __init__(self):
+    def __init__(self, screen_num=1, delay = 100, stm=None):
+        self.screen_num = screen_num 
         self.display_surface = pygame.display.get_surface()
         self.canvas_data = {}
         # initialize a five second timer
-        self.time = 1200
+        self.time = delay
         self.imports()
+        self.switch_to_menu = stm
         # add cursor
         surf = load('graphics/cursors/mouse.png').convert_alpha()
         cursor = pygame.cursors.Cursor((0,0), surf)
@@ -29,7 +31,7 @@ class Launcher():
         self.launcher_music = pygame.mixer.Sound('audio/gamelaunch.ogg')
         
     def imports(self):
-        self.canvas_data['background'] = load('graphics/screen_1.png').convert_alpha()
+        self.canvas_data['background'] = load('graphics/screen_1.png').convert_alpha() 
         # self.canvas_data['title'] = load('graphics/launcher/title.png').convert_alpha()
     #     self.canvas_data['play_button'] = load('graphics/buttons/play_button.png').convert_alpha()
     #     self.canvas_data['play_button_hover'] = load('graphics/buttons/play_button_hover.png').convert_alpha()
@@ -38,7 +40,7 @@ class Launcher():
     #     self.canvas_data['quit_button_hover'] = load('graphics/buttons/edit_button_hover.png').convert_alpha()
 
 
-    def run(self):
+    def run(self, dt):
         self.launcher_music.play(loops=-1)
         while True:
             self.events()
@@ -49,8 +51,11 @@ class Launcher():
             self.time -= 1
 
             # if timer is done, break out of loop
-            if self.time == 0:
+            if self.time < 0:
+                self.launcher_music.stop()
+                self.screen_num = 2
                 break
+        self.switch_to_menu()
     def events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -100,7 +105,9 @@ if __name__ == '__main__':
     pygame.init()
     pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     pygame.display.set_caption('Launcher')
-    Launcher().run()
+    clock = pygame.time.Clock()
+    dt = clock.tick() / 1000
+    Launcher().run(dt)
     pygame.quit()
     sys.exit()
 
