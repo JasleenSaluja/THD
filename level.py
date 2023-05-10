@@ -105,7 +105,7 @@ class Level:
 					
 					case 15: Animated(asset_dict['obstacles']['small_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
 					case 16: Animated(asset_dict['obstacles']['large_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
-					case 17: Animated(asset_dict['obsatcles']['left_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
+					case 17: Animated(asset_dict['obstacles']['left_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
 					case 18: Animated(asset_dict['obstacles']['right_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
 
 		for sprite in self.shell_sprites:
@@ -123,8 +123,8 @@ class Level:
 			self.hit_sound.play()
 			self.player.damage()
 			self.player.kill()
-			#pygame.quit()
-			#exit()
+			pygame.quit()
+			exit()
 
 	def event_loop(self):
 		for event in pygame.event.get():

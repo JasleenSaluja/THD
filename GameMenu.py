@@ -21,7 +21,6 @@ class GameMenu:
         self.imports()
         self.switch= switch
         
-
         # add cursor
         surf = load('graphics/cursors/mouse.png').convert_alpha()
         cursor = pygame.cursors.Cursor((0,0), surf)
@@ -60,31 +59,32 @@ class GameMenu:
                 self.pressed=True
             else:
                 if self.pressed==True:
-                    print('click')
+                    print('clicked play')
                     self.pressed=False
-            
-
+                    self.switch()
         #edit button
         if self.edit_button_rect.collidepoint(mouse_pos()):
             self.edit_button_rect = self.display_surface.blit(self.edit_button_hover, (692,433))
             if pygame.mouse.get_pressed()[0]:
                 self.edit_button_rect = self.display_surface.blit(self.edit_button_pressed, (692,433))
+                self.screen_num = 3
                 self.pressed=True
+                self.switch()
             else:
                 if self.pressed==True:
                     print('click')
                     self.pressed=False
-
-
-        
+                    
 
     def run(self, dt):
         self.launcher_music.play(loops=-1)
         while True:
             self.events(play_button=self.play_button,edit_button=self.edit_button)
+            self.click()
             self.update()
             self.draw()
-            self.click()
+            if self.screen_num == 3:
+                break
             pygame.display.update()
             #self.clock.tick(ANIMATION_SPEED)
     
@@ -97,15 +97,11 @@ class GameMenu:
                 if event.button == 1:
                     if self.play_button_rect.collidepoint(self.mouse_pos):
                         self.launcher_music.stop()
-                        self.switch()
+                        # self.switch()
                     elif self.edit_button_rect.collidepoint(self.mouse_pos):
                         self.launcher_music.stop()
-                        self.switch()
+                        # self.switch()
                 print(self.mouse_pos)
-                
-
-           
-        
     
     def update(self):
         self.mouse_pos = mouse_pos()

@@ -19,17 +19,13 @@ class Main:
 	def __init__(self):
 		pygame.init()
 		self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-		pygame.display.set_caption('The Hungry Dead')
 		self.clock = pygame.time.Clock()
 		self.imports()
-
 		self.editor_active = False
 		self.transition = Transition(self.toggle)
-		self.launcher = Launcher(self.screen_num, 500, self.switchToMenu)
-		self.gamemenu = GameMenu(self.screen_num, self.switch)
+		self.launcher = Launcher(self.screen_num, 10, self.switchToMenu)
+		self.gamemenu = GameMenu(self.screen_num, self.switch_to_editor)
 		self.editor = Editor(self.land_tiles, self.switch)
-
-		# cursor 
 		surf = load('graphics/cursors/mouse.png').convert_alpha()
 		cursor = pygame.cursors.Cursor((0,0), surf)
 		pygame.mouse.set_cursor(cursor)
@@ -76,13 +72,24 @@ class Main:
 		elif self.screen_num == 2:
 			pass
 		elif self.screen_num == 3:
-			pass
-		elif self.screen_num == 4:
-			self.editor_active = not self.editor_active
 			if self.editor_active:
 				self.editor.editor_music.play()		
+		elif self.screen_num == 4:
+			self.editor_active = not self.editor_active
+
+	def switchToMenu(self):
+		print("switching to menu")
+		self.screen_num = 2
+
+	def switch_to_editor(self):
+		print("switching to editor")
+		self.screen_num = 3
+		self.editor_active = True
+		
+	
 
 	def switch(self, grid = None):
+		self.screen_num = 4
 		self.transition.active = True
 		if grid:
 			self.level = Level(
@@ -103,23 +110,24 @@ class Main:
 					'pearl': self.pearl,
 					'clouds': self.clouds},
 				self.level_sounds)
-
+		else:
+			pass
+			
 	def run(self):
 		while True:
 			dt = self.clock.tick() / 1000
+			print(f'dt: {dt}, screen = {self.screen_num}')
 			if self.screen_num == 1:
 				self.launcher.run(dt)
 			elif self.screen_num == 2:
 				self.gamemenu.run(dt)
 			elif self.screen_num == 3:
 				self.editor.run(dt)
-				self.transition.display(dt)
 			elif self.screen == 4 :
 				self.level.run(dt)	
+			self.transition.display(dt)
 			pygame.display.update()
 
-	def switchToMenu(self):
-		self.screen_num = 2
 
 
 class Transition:
