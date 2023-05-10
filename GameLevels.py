@@ -14,7 +14,7 @@ from random import choice, randint
 import pickle #new
 
 class GameLevels:
-    def __init__(self, screen_num=2, switch=None):
+    def __init__(self, screen_num=4, switch=None):
         self.screen_num = screen_num
         self.display_surface = pygame.display.get_surface()
         self.canvas_data = {}

@@ -78,28 +78,10 @@ class Launcher():
     
     def update(self):
         self.mouse_pos = mouse_pos()
-        # self.play_button_hover = self.play_button_rect.collidepoint(self.mouse_pos)
-        # self.quit_button_hover = self.quit_button_rect.collidepoint(self.mouse_pos)
-
-        # if self.play_button_hover:
-        #     self.play_button = self.canvas_data['play_button_hover']
-        # else:
-        #     self.play_button = self.canvas_data['play_button']
-
-        # if self.quit_button_hover:
-        #     self.quit_button = self.canvas_data['quit_button_hover']
-        # else:
-        #     self.quit_button = self.canvas_data['quit_button']
-
+        
     def draw(self):
         self.display_surface.blit(self.canvas_data['background'], (0,0))
-        # self.display_surface.blit(self.canvas_data['title'], (0,0))
-        # self.play_button_rect = self.display_surface.blit(self.play_button, (0,0))
-        # self.quit_button_rect = self.display_surface.blit(self.quit_button, (0,0))
-
-        # pygame.draw.rect(self.display_surface, (255,0,0), self.play_button_rect, 1)
-        # pygame.draw.rect(self.display_surface, (255,0,0), self.quit_button_rect, 1)
-
+        
 if __name__ == '__main__':
     # test the launcher
     pygame.init()
