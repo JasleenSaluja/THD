@@ -6,6 +6,7 @@ from settings import *
 from timer import Timer
 
 from random import choice, randint
+from support import import_folder
 
 class Generic(pygame.sprite.Sprite):
 	def __init__(self, pos, surf, group, z = LEVEL_LAYERS['main']):
@@ -259,7 +260,7 @@ class Player(Generic):
 		self.mask = pygame.mask.from_surface(self.image)
 
 		# if self.invul_timer.active:
-		# 	surf = load('graphics/player_1/dead_right/dead__008.png')
+		# 	surf = import_folder('graphics/player_1/dead_right/dead__008.png')
 		# 	#surf.set_colorkey('black')
 		# 	self.image = surf
 

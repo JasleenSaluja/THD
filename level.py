@@ -126,6 +126,19 @@ class Level:
 			pygame.quit()
 			exit()
 
+	# #if player falls off ground
+	# def check_death(self):
+	# 	if self.player.rect.top > WINDOW_HEIGHT:
+	# 		pygame.quit()
+	# 		exit()
+
+
+	#player wins- if the player collides with the win board
+	# def check_win(self):
+	# 	if pygame.sprite.collide_rect(self.player, self.win_board,False):
+	# 		self.switch()
+	# 		self.bg_music.stop()
+
 	def event_loop(self):
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -156,6 +169,8 @@ class Level:
 		self.all_sprites.update(dt)
 		self.get_coins()
 		self.get_damage()
+		# self.check_death()
+		# self.check_win()
 
 		# drawing
 		self.display_surface.fill(SKY_COLOR)
