@@ -122,15 +122,15 @@ class Level:
 		if collision_sprites:
 			self.hit_sound.play()
 			self.player.damage()
-			self.player.kill()
+			#self.player.kill()
 			pygame.quit()
 			exit()
 
 	# #if player falls off ground
-	# def check_death(self):
-	# 	if self.player.rect.top > WINDOW_HEIGHT:
-	# 		pygame.quit()
-	# 		exit()
+	def check_death(self):
+		if self.player.rect.top > WINDOW_HEIGHT:
+			pygame.quit()
+			exit()
 
 
 	#player wins- if the player collides with the win board
@@ -169,7 +169,7 @@ class Level:
 		self.all_sprites.update(dt)
 		self.get_coins()
 		self.get_damage()
-		# self.check_death()
+		self.check_death()
 		# self.check_win()
 
 		# drawing

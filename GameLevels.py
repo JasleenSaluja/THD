@@ -61,9 +61,9 @@ class GameLevels:
         self.launcher_music.play(loops=-1)
         while True:
             self.events(level_button=self.level_button)
+            self.click()
             self.update()
             self.draw()
-            self.click()
             pygame.display.update()
             #self.clock.tick(ANIMATION_SPEED)
     

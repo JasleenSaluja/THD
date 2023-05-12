@@ -14,12 +14,14 @@ from random import choice, randint
 import pickle #new
 
 class GameMenu:
-    def __init__(self, screen_num=2, switch=None):
+    def __init__(self, screen_num=2, switch=None,stl=None):
         self.screen_num = screen_num
         self.display_surface = pygame.display.get_surface()
         self.canvas_data = {}
         self.imports()
         self.switch= switch
+
+        self.switch_to_level=stl
         
         # add cursor
         surf = load('graphics/cursors/mouse.png').convert_alpha()
@@ -56,12 +58,14 @@ class GameMenu:
             self.play_button_rect = self.display_surface.blit(self.play_button_hover, (282,433))
             if pygame.mouse.get_pressed()[0]:
                 self.play_button_rect = self.display_surface.blit(self.play_button_pressed, (282,433))
+                self.screen_num = 4
                 self.pressed=True
+                self.switch_to_level()
             else:
                 if self.pressed==True:
                     print('clicked play')
                     self.pressed=False
-                    self.switch()
+                    #self.switch()
         #edit button
         if self.edit_button_rect.collidepoint(mouse_pos()):
             self.edit_button_rect = self.display_surface.blit(self.edit_button_hover, (692,433))
@@ -85,6 +89,8 @@ class GameMenu:
             self.draw()
             if self.screen_num == 3:
                 break
+            elif self.screen_num == 4:
+                break
             pygame.display.update()
             #self.clock.tick(ANIMATION_SPEED)
     
@@ -97,7 +103,7 @@ class GameMenu:
                 if event.button == 1:
                     if self.play_button_rect.collidepoint(self.mouse_pos):
                         self.launcher_music.stop()
-                        # self.switch()
+                        #self.switch_to_level()
                     elif self.edit_button_rect.collidepoint(self.mouse_pos):
                         self.launcher_music.stop()
                         # self.switch()
