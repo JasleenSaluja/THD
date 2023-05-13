@@ -52,7 +52,7 @@ class Launcher():
 
             # if timer is done, break out of loop
             if self.time < 0:
-                # self.launcher_music.stop()
+                self.launcher_music.stop()
                 self.screen_num = 2
                 break
         self.switch_to_menu()
