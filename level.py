@@ -7,6 +7,8 @@ from support import *
 from sprites import Generic, Block, Animated, Particle, Coin, Player, Spikes, Zombie, Shell, Cloud
 
 from random import choice, randint
+from GameOver import GameOver
+from GameWin import GameWin
 
 class Level:
 	def __init__(self, grid, switch, asset_dict, audio):
@@ -19,6 +21,10 @@ class Level:
 		self.damage_sprites = pygame.sprite.Group()
 		self.collision_sprites = pygame.sprite.Group()
 		self.shell_sprites = pygame.sprite.Group()
+
+		#gameover and gamewin screen
+		self.gameover=GameOver() #change
+		self.gamewin=GameWin() #change
 
 		self.build_level(grid, asset_dict, audio['jump'])
 
@@ -122,22 +128,30 @@ class Level:
 		if collision_sprites:
 			self.hit_sound.play()
 			self.player.damage()
+			self.bg_music.stop()
+			self.gameover.run(dt=0)
 			#self.player.kill()
-			pygame.quit()
-			exit()
+			# pygame.quit()
+			# exit()
 
 	# #if player falls off ground
 	def check_death(self):
 		if self.player.rect.top > WINDOW_HEIGHT:
-			pygame.quit()
-			exit()
+			self.bg_music.stop()
+			self.gameover.run(dt=0)
+			# pygame.quit()
+			# exit()
 
 
 	#player wins- if the player collides with the win board
-	# def check_win(self):
-	# 	if pygame.sprite.collide_rect(self.player, self.win_board,False):
-	# 		self.switch()
-	# 		self.bg_music.stop()
+	def check_win(self):#change
+		if pygame.sprite.spritecollide(self.player, self.win_spriites,True):
+			self.bg_music.stop()
+			self.gamewin.run(dt=0)
+			# pygame.quit()
+			# exit()
+			# self.switch()
+			# self.bg_music.stop()
 
 	def event_loop(self):
 		for event in pygame.event.get():
@@ -170,7 +184,7 @@ class Level:
 		self.get_coins()
 		self.get_damage()
 		self.check_death()
-		# self.check_win()
+		self.check_win()
 
 		# drawing
 		self.display_surface.fill(SKY_COLOR)
