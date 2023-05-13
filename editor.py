@@ -74,7 +74,7 @@ class Editor:
 
         # music
         self.editor_music = pygame.mixer.Sound('audio/Explorer.ogg')
-        self.editor_music.set_volume(0.4)
+        self.editor_music.set_volume(1.0)
         self.editor_music.play(loops = -1)
 
     # support

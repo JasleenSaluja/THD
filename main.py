@@ -28,7 +28,7 @@ class Main:
 		self.launcher = Launcher(self.screen_num, 10, self.switchToMenu)
 		self.gamemenu = GameMenu(self.screen_num, self.switch_to_editor, self.switch_to_level)
 		self.editor = Editor(self.land_tiles, self.switch)
-		self.gamelevels=GameLevels(self.screen_num,self.switch_to_level)
+		self.gamelevels=GameLevels(self.screen_num,self.switchToMenu)
 		surf = load('graphics/cursors/mouse.png').convert_alpha()
 		cursor = pygame.cursors.Cursor((0,0), surf)
 		pygame.mouse.set_cursor(cursor)
