@@ -5,7 +5,7 @@ from support import *
 
 from pygame.image import load
 
-from editor import Editor
+from levels.editor import Editor
 from level import Level
 from launcher import  Launcher
 from GameMenu import GameMenu 

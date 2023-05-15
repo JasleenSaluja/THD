@@ -6,18 +6,20 @@ from pygame.image import load
 
 from settings import *
 from support import *
-
+import os
 from menu import Menu
 from timer import Timer
 
 from random import choice, randint
 import pickle #new
+from firbase import download_all_levels
 
 class GameLevels:
     def __init__(self, screen_num=4, switch=None,stm=None):
         self.screen_num = screen_num
         self.display_surface = pygame.display.get_surface()
         self.canvas_data = {}
+        download_all_levels()
         self.imports()
         self.switch= switch
         self.switchToMenu=stm
@@ -39,9 +41,20 @@ class GameLevels:
         self.background_2=load('graphics/screen_3.png').convert_alpha()
 
         #level button
-        self.level_button=load('graphics/buttons/level_button.png').convert_alpha()
-        self.level_button_rect=self.level_button.get_rect(center=(282,433))
-        
+        self.level_buttons = []
+        for level in os.listdir('levels'):
+            x= 282
+            y= 433
+            level_button=load('graphics/buttons/level_button.png').convert_alpha()
+            level_button_rect=self.level_button.get_rect(center=(x,y))
+            self.level_buttons.append({
+                'button': level_button,
+                'rect': level_button_rect,
+                'level': level
+            })
+            x += 100
+
+    
         #exit button
         self.back_button=load('graphics/buttons/back_button.png').convert_alpha()
         self.back_button_rect=self.back_button.get_rect(center=(33,28))
