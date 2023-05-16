@@ -129,30 +129,29 @@ class Level:
 			self.hit_sound.play()
 			self.player.damage()
 			self.bg_music.stop()
-			self.gameover.run(dt=0)
+			
+			# self.gameover.run(dt=0)
 			#self.player.kill()
-			# pygame.quit()
-			# exit()
+			pygame.quit()
+			exit()
 
 	# #if player falls off ground
-	def check_death(self):
-		if self.player.rect.top > WINDOW_HEIGHT:
-			self.bg_music.stop()
-			self.gameover.run(dt=0)
+	# def check_death(self):
+	# 	if self.player.rect.top > WINDOW_HEIGHT:
+	# 		self.bg_music.stop()
+	# 		self.gameover.run(dt=0)
 			# pygame.quit()
 			# exit()
 
 
 	#player wins- if the player collides with the win board
-	def check_win(self):#change
-		if pygame.sprite.spritecollide(self.player, self.win_spriites,True):
-			self.bg_music.stop()
-			self.gamewin.run(dt=0)
+	# def check_win(self):#change
+	# 	if pygame.sprite.spritecollide(self.player, self.win_sprites,True):
+	# 		self.bg_music.stop()
+	# 		self.gamewin.run(dt=0)
 			# pygame.quit()
 			# exit()
-			# self.switch()
-			# self.bg_music.stop()
-
+			
 	def event_loop(self):
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -183,8 +182,8 @@ class Level:
 		self.all_sprites.update(dt)
 		self.get_coins()
 		self.get_damage()
-		self.check_death()
-		self.check_win()
+		# self.check_death()
+		# self.check_win()
 
 		# drawing
 		self.display_surface.fill(SKY_COLOR)

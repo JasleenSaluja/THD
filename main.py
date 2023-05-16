@@ -5,7 +5,7 @@ from support import *
 
 from pygame.image import load
 
-from levels.editor import Editor
+from editor import Editor
 from level import Level
 from launcher import  Launcher
 from GameMenu import GameMenu 
@@ -28,7 +28,8 @@ class Main:
 		self.launcher = Launcher(self.screen_num, 10, self.switchToMenu)
 		self.gamemenu = GameMenu(self.screen_num, self.switch_to_editor, self.switch_to_level)
 		self.editor = Editor(self.land_tiles, self.switch)
-		self.gamelevels=GameLevels(self.screen_num,self.switchToMenu)
+		self.gamelevels=GameLevels(self.screen_num,self.switchToMenu,self.switchtoGame)
+		#self.level = Level(self.screen_num, self.switch,self.level_sounds,self.switch)
 		surf = load('graphics/cursors/mouse.png').convert_alpha()
 		cursor = pygame.cursors.Cursor((0,0), surf)
 		pygame.mouse.set_cursor(cursor)
@@ -80,7 +81,8 @@ class Main:
 		elif self.screen_num == 4:
 			pass
 		elif self.screen_num == 5:
-			pass
+			self.level.bg_music.play()
+		
 
 	def switchToMenu(self):
 		print("switching to menu")
@@ -91,9 +93,13 @@ class Main:
 		self.screen_num = 3
 		self.editor_active = True
 	
-	def switch_to_level(self):
+	def switch_to_level(self):  #for the levels page
 		print("switching to level")
 		self.screen_num = 4
+
+	def switchtoGame(self): # for the actual level
+		self.screen_num = 5
+
 		
 		
 	

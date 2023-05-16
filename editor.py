@@ -9,7 +9,7 @@ from support import *
 
 from menu import Menu
 from timer import Timer
-import time
+
 from random import choice, randint
 import pickle #new
 from firbase import upload_file
@@ -150,9 +150,6 @@ class Editor:
             
 
     def save_grid_to_file(self,level_name='level_1'): #new
-        import datetime
-        date = datetime.datetime.strftime(datetime.datetime.now(), '%Y%m%d%H')
-        level_name = f'level_{date}'
         path=f'levels/{level_name}.game'              #new
         with open(path,'wb') as f:                    #new
             pickle.dump(self.canvas_data,f)           #new
