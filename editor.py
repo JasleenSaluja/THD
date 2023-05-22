@@ -6,7 +6,7 @@ from pygame.image import load
 
 from settings import *
 from support import *
-
+from datetime import datetime
 from menu import Menu
 from timer import Timer
 
@@ -14,13 +14,13 @@ from random import choice, randint
 import pickle #new
 from firbase import upload_file
 class Editor:
-    def __init__(self, land_tiles, switch):
+    def __init__(self, land_tiles, switch, screen_num=3):
         
         # main setup 
         self.display_surface = pygame.display.get_surface()
         self.canvas_data = {}
         self.switch = switch
-
+        self.screen_num = screen_num
         # imports 
         self.land_tiles = land_tiles
         self.imports()
@@ -150,7 +150,9 @@ class Editor:
             
 
     def save_grid_to_file(self,level_name='level_1'): #new
-        path=f'levels/{level_name}.game'              #new
+        now = datetime.strftime(datetime.now(), '_%Y_%m_%d_%H_%M_%S') #new
+        path=f'levels/{level_name}{now}.game'              #new
+        level_name = f'{level_name}{now}'                  #new
         with open(path,'wb') as f:                    #new
             pickle.dump(self.canvas_data,f)           #new
             upload_file(level_name, path)                         #new            
@@ -225,9 +227,10 @@ class Editor:
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
-                self.switch(self.create_grid())
+                self.switch()
                 self.save_grid_to_file()  #new
                 self.editor_music.stop()
+                self.screen_num = 4
             
             self.pan_input(event)
             self.selection_hotkeys(event)
