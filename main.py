@@ -28,8 +28,7 @@ class Main:
 		self.launcher = Launcher(self.screen_num, 10, self.switchToMenu)
 		self.gamemenu = GameMenu(self.screen_num, self.switch_to_editor, self.switch_to_level)
 		self.editor = Editor(self.land_tiles, self.switch_to_level, self.screen_num)
-		self.gamelevels=GameLevels(self.screen_num,self.switchToMenu,self.switchtoGame)
-		#self.level = Level(self.screen_num, self.switch,self.level_sounds,self.switch)
+		self.gamelevels=GameLevels(self.screen_num,self.switchToMenu,self.switch)
 		surf = load('graphics/cursors/mouse.png').convert_alpha()
 		cursor = pygame.cursors.Cursor((0,0), surf)
 		pygame.mouse.set_cursor(cursor)
@@ -99,10 +98,6 @@ class Main:
 
 	def switchtoGame(self): # for the actual level
 		self.screen_num = 5
-
-		
-		
-	
 
 	def switch(self, grid = None):
 		self.screen_num = 5

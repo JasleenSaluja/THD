@@ -11,7 +11,7 @@ from GameOver import GameOver
 from GameWin import GameWin
 from editor import CanvasTile
 
-class Level:
+class SavedLevel:
     def __init__(self, grid, switch, asset_dict, audio):
         self.display_surface = pygame.display.get_surface()
         self.switch = switch
