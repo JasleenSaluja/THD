@@ -14,12 +14,13 @@ db = firestore.client()
 bucket = storage.bucket()
 
 def upload_file(name='level1', filepath='levels/level_1.game'):
-    bucket.blob(name).upload_from_filename(filepath)
-    doc_ref = db.collection(u'levels').document(name)
-    doc_ref.set({
-        u'level': name,
-        u'path': filepath
-    })
+    # bucket.blob(filepath).upload_from_filename(filepath)
+    # doc_ref = db.collection(u'levels').document(name)
+    # doc_ref.set({
+    #     u'level': name,
+    #     u'path': filepath
+    # })
+    pass
 
 
 

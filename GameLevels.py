@@ -19,11 +19,14 @@ class GameLevels:
     def __init__(self, screen_num=4, switch=None,stm=None,stg=None,):
         self.screen_num = screen_num
         self.display_surface = pygame.display.get_surface()
-        self.canvas_data = {}
-        download_all_levels()
+        self.canvas_data = None
+        # download_all_levels()
+        self.canvas_objects = pygame.sprite.Group()
+        self.foreground = pygame.sprite.Group()
+        self.background = pygame.sprite.Group()
+        
         self.switch= switch
         self.switchToMenu=stm
-        self.switch=stg
         self.imports()
         # add cursor
         surf = load('graphics/cursors/mouse.png').convert_alpha()
@@ -44,9 +47,11 @@ class GameLevels:
             'music': pygame.mixer.Sound('audio/SuperHero.ogg'),
         }
 
+    
+
     def create_grid(self):
-        
-        # add objects to the tiles
+    
+    # add objects to the tiles
 
         for tile in self.canvas_data.values():
             tile.objects = []
@@ -101,8 +106,6 @@ class GameLevels:
                         layers['fg objects'][(int(x + offset.x), int(y + offset.y))] = obj
 
         return layers
- 
-
 
         
     def imports(self):
@@ -128,6 +131,39 @@ class GameLevels:
         self.back_button=load('graphics/buttons/back_button.png').convert_alpha()
         self.back_button_rect=self.back_button.get_rect(center=(33,28))
 
+        # terrain
+        self.land_tiles = import_folder_dict('graphics/terrain/land_1')
+        self.water_bottom = load('graphics/terrain/water/water_bottom.png').convert_alpha()
+        self.water_top_animation = import_folder('graphics/terrain/water/animation')
+
+        # coins
+        self.gold = import_folder('graphics/items/gold')
+        self.silver = import_folder('graphics/items/silver')
+        self.diamond = import_folder('graphics/items/diamond')
+        self.particle = import_folder('graphics/items/particle')
+
+        # palm trees
+        self.obstacles = {folder: import_folder(f'graphics/terrain/obstacles/{folder}') for folder in list(walk('graphics/terrain/obstacles'))[0][1]}
+
+        # enemies
+        self.spikes = load('graphics/enemies/spikes/spikes.png').convert_alpha()
+        self.zombie = {folder: import_folder(f'graphics/enemies/zombie/{folder}') for folder in list(walk('graphics/enemies/zombie'))[0][1]}
+        self.shell = {folder: import_folder(f'graphics/enemies/shell_left/{folder}') for folder in list(walk('graphics/enemies/shell_left/'))[0][1]}
+        self.pearl = load('graphics/enemies/pearl/pearl.png').convert_alpha()
+
+        # player
+        self.player_graphics = {folder: import_folder(f'graphics/player_1/{folder}') for folder in list(walk('graphics/player_1/'))[0][1]}
+
+        # clouds
+        self.clouds = import_folder('graphics/clouds')
+
+        # sounds
+        self.level_sounds = {
+            'coin': pygame.mixer.Sound('audio/coin.wav'),
+            'hit': pygame.mixer.Sound('audio/hit.wav'),
+            'jump': pygame.mixer.Sound('audio/jump.wav'),
+            'music': pygame.mixer.Sound('audio/SuperHero.ogg'),
+        }
        
         
     def click(self):
@@ -136,8 +172,11 @@ class GameLevels:
                 if pygame.mouse.get_pressed()[0]:
                     self.pressed=True
                     self.screen_num=5
-                    with open(f'levels/{levelDict["level"]}', 'rb') as f:
+                    level_file = f'levels/{levelDict["level"]}'
+                    print(f'level => {levelDict["level"]}')
+                    with open(level_file, 'rb') as f:
                         self.canvas_data = pickle.load(f)
+                        print(self.canvas_data)
                         self.switch(self.create_grid())
                 else:
                     if self.pressed==True:
@@ -201,7 +240,7 @@ class GameLevels:
         x, y = 107, 204
         for levelDict in self.level_buttons:
             levelDict['rect'] = self.display_surface.blit(levelDict['button'], (x,y))
-            x += 100
+            x += 250
         self.back_button_rect = self.display_surface.blit(self.back_button, (74,75))
         
         #pygame.draw.rect(self.display_surface, (255,0,0), self.level_button_rect, 1)

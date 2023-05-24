@@ -56,6 +56,7 @@ class Level:
     def build_level(self, grid, asset_dict, jump_sound):
         for layer_name, layer in grid.items():
             for pos, data in layer.items():
+                print(f'pos: {pos}, data: {data}')
                 if layer_name == 'terrain':
                     Generic(pos, asset_dict['land'][data], [self.all_sprites, self.collision_sprites])
                 if layer_name == 'water':
