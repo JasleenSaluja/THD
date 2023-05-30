@@ -39,6 +39,7 @@ class Main:
 		self.water_bottom = load('graphics/terrain/water/water_bottom.png').convert_alpha()
 		self.water_top_animation = import_folder('graphics/terrain/water/animation')
 
+
 		# coins
 		self.gold = import_folder('graphics/items/gold')
 		self.silver = import_folder('graphics/items/silver')
@@ -102,7 +103,7 @@ class Main:
 	def switch(self, grid = None):
 		self.screen_num = 5
 		self.transition.active = True
-		print(f'grid: {grid}')
+		# print(f'grid: {grid}')
 		if grid:
 			self.level = Level(
 				grid, 

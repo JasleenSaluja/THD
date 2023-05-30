@@ -55,8 +55,9 @@ class Level:
 
     def build_level(self, grid, asset_dict, jump_sound):
         for layer_name, layer in grid.items():
+            # print(layer_name, layer, "=<")
             for pos, data in layer.items():
-                print(f'pos: {pos}, data: {data}')
+                # print(f'pos: {pos}, data: {data}')
                 if layer_name == 'terrain':
                     Generic(pos, asset_dict['land'][data], [self.all_sprites, self.collision_sprites])
                 if layer_name == 'water':
@@ -68,7 +69,11 @@ class Level:
                 match data:
                     case 0: self.player = Player(pos, asset_dict['player'], self.all_sprites, self.collision_sprites, jump_sound)
                     case 1: 
-                        self.horizon_y = pos[1]
+                        try:
+                            self.horizon_y = pos[1]
+                        except Exception as e:
+                            print(e)
+                            self.horizon_y = 20
                         self.all_sprites.horizon_y = pos[1]
                     # coins
                     case 4: Coin('gold', asset_dict['gold'], pos, [self.all_sprites, self.coin_sprites])
@@ -104,6 +109,7 @@ class Level:
                         Animated(asset_dict['obstacles']['tree'], pos, self.all_sprites)
                         #Block(pos, (76,50), self.collision_sprites)
                     case 13: 
+
                         Animated(asset_dict['obstacles']['skeleton'], pos, self.all_sprites)
                         Block(pos, (42,32), self.collision_sprites)
                     case 14: 
