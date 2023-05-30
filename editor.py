@@ -153,8 +153,7 @@ class Editor:
         now = datetime.strftime(datetime.now(), '_%Y_%m_%d_%H_%M_%S') #new
         path=f'levels/{level_name}{now}.game'              #new
         level_name = f'{level_name}{now}'                  #new
-        print(self.canvas_data)
-        print(self.canvas_data.items())
+
         with open(path,'wb') as f:                    #new
             pickle.dump(self.canvas_data,f)           #new
             upload_file(level_name, path)                         #new            
@@ -229,10 +228,10 @@ class Editor:
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
-                self.switch()
                 self.editor_music.stop()
                 self.save_grid_to_file()  #new
                 self.screen_num = 4
+                self.switch()
             
             self.pan_input(event)
             self.selection_hotkeys(event)

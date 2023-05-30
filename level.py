@@ -57,7 +57,6 @@ class Level:
         for layer_name, layer in grid.items():
             # print(layer_name, layer, "=<")
             for pos, data in layer.items():
-                # print(f'pos: {pos}, data: {data}')
                 if layer_name == 'terrain':
                     Generic(pos, asset_dict['land'][data], [self.all_sprites, self.collision_sprites])
                 if layer_name == 'water':
@@ -65,7 +64,7 @@ class Level:
                         Animated(asset_dict['water top'], pos, self.all_sprites, LEVEL_LAYERS['water'])
                     else:
                         Generic(pos, asset_dict['water bottom'], self.all_sprites, LEVEL_LAYERS['water'])
-
+                print(data)
                 match data:
                     case 0: self.player = Player(pos, asset_dict['player'], self.all_sprites, self.collision_sprites, jump_sound)
                     case 1: 
@@ -240,7 +239,11 @@ class Level:
             surf = choice(self.cloud_surfs)
             surf = pygame.transform.scale2x(surf) if randint(0,5) > 3 else surf
             x = randint(self.level_limits['left'], self.level_limits['right'])
-            y = self.horizon_y - randint(-50,600)
+            try:
+                y = self.horizon_y - randint(-50,600)
+            except:
+                self.horizon_y = 20
+                y = self.horizon_y - randint(-50,600)
             Cloud((x,y), surf, self.all_sprites, self.level_limits['left'])
 
     def run(self, dt):

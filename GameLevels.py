@@ -114,17 +114,6 @@ class GameLevels:
 
         #level button
         self.level_buttons = []
-        for level in os.listdir('levels'):
-            x= 282
-            y= 433
-            level_button=load('graphics/buttons/level_button.png').convert_alpha()
-            level_button_rect=level_button.get_rect(center=(x,y))
-            self.level_buttons.append({
-                'button': level_button,
-                'rect': level_button_rect,
-                'level': level
-            })
-            x += 300
             
     
         #exit button
@@ -164,7 +153,19 @@ class GameLevels:
             'jump': pygame.mixer.Sound('audio/jump.wav'),
             'music': pygame.mixer.Sound('audio/SuperHero.ogg'),
         }
-       
+        
+        for level in os.listdir('levels'):
+            x= 282
+            y= 433
+            level_button=load('graphics/buttons/level_button.png').convert_alpha()
+            level_button_rect=level_button.get_rect(center=(x,y))
+            self.level_buttons.append({
+                'button': level_button,
+                'rect': level_button_rect,
+                'level': level
+            })
+            x += 300
+    
         
     def click(self):
         for levelDict in self.level_buttons:
@@ -176,7 +177,7 @@ class GameLevels:
                     print(f'level => {levelDict["level"]}')
                     with open(level_file, 'rb') as f:
                         self.canvas_data = pickle.load(f)
-                        print(self.canvas_data)
+                        # print(self.canvas_data)
                         self.switch(self.create_grid())
                 else:
                     if self.pressed==True:
