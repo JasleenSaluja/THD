@@ -12,7 +12,7 @@ from GameWin import GameWin
 from editor import CanvasTile
 
 class Level:
-    def __init__(self, grid, switch, asset_dict, audio):
+    def __init__(self, grid, switch, asset_dict, audio,change_coins):
         self.display_surface = pygame.display.get_surface()
         self.switch = switch
 
@@ -22,6 +22,8 @@ class Level:
         self.damage_sprites = pygame.sprite.Group()
         self.collision_sprites = pygame.sprite.Group()
         self.shell_sprites = pygame.sprite.Group()
+        self.killable_sprites = pygame.sprite.Group() #change
+        self.win_sprites = pygame.sprite.Group() #change
 
         #gameover and gamewin screen
         self.gameover=GameOver() #change
@@ -34,6 +36,9 @@ class Level:
         'left': -WINDOW_WIDTH,
         'right': sorted(list(grid['terrain'].keys()), key = lambda pos: pos[0])[-1][0] + 500
         }
+
+        # coins collected- user interface
+        self.change_coins=change_coins #change
 
         # additional stuff
         self.particle_surfs = asset_dict['particle']
@@ -75,14 +80,14 @@ class Level:
                             self.horizon_y = 20
                         self.all_sprites.horizon_y = pos[1]
                     # coins
-                    case 4: Coin('gold', asset_dict['gold'], pos, [self.all_sprites, self.coin_sprites])
-                    case 5: Coin('silver', asset_dict['silver'], pos, [self.all_sprites, self.coin_sprites])
-                    case 6: Coin('diamond', asset_dict['diamond'], pos, [self.all_sprites, self.coin_sprites])
+                    case 4: Coin('gold', asset_dict['gold'], pos, [self.all_sprites, self.coin_sprites],50) #change
+                    case 5: Coin('silver', asset_dict['silver'], pos, [self.all_sprites, self.coin_sprites],25) #change
+                    case 6: Coin('diamond', asset_dict['diamond'], pos, [self.all_sprites, self.coin_sprites],15) #change
 
                     # enemies
                     case 7: Spikes(asset_dict['spikes'], pos, [self.all_sprites, self.damage_sprites])
                     case 8: 
-                        Zombie(asset_dict['zombie'], pos, [self.all_sprites, self.damage_sprites], self.collision_sprites)
+                        Zombie(asset_dict['zombie'], pos, [self.all_sprites, self.damage_sprites,self.killable_sprites], self.collision_sprites) #change
                     case 9: 
                         Shell(
                             orientation = 'left', 
@@ -116,10 +121,10 @@ class Level:
                         Block(pos, (64,64), self.collision_sprites)
                         #Block(pos + vector(50,0), (76,50), self.collision_sprites)
                     
-                    case 15: Animated(asset_dict['obstacles']['small_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
-                    case 16: Animated(asset_dict['obstacles']['large_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
-                    case 17: Animated(asset_dict['obstacles']['left_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
-                    case 18: Animated(asset_dict['obstacles']['right_bg'], pos, self.all_sprites, LEVEL_LAYERS['bg'])
+                    case 15: Animated(asset_dict['obstacles']['small_bg'], pos,[ self.all_sprites,self.win_sprites], LEVEL_LAYERS['bg']) #change
+                    case 16: Animated(asset_dict['obstacles']['large_bg'], pos, [self.all_sprites,self.win_sprites], LEVEL_LAYERS['bg']) #change
+                    case 17: Animated(asset_dict['obstacles']['left_bg'], pos, [self.all_sprites,self.win_sprites], LEVEL_LAYERS['bg']) #change
+                    case 18: Animated(asset_dict['obstacles']['right_bg'], pos, [self.all_sprites,self.win_sprites], LEVEL_LAYERS['bg']) #change
 
         for sprite in self.shell_sprites:
             sprite.player = self.player
@@ -128,6 +133,7 @@ class Level:
         collided_coins = pygame.sprite.spritecollide(self.player, self.coin_sprites, True)
         for sprite in collided_coins:
             self.coin_sound.play()
+            self.change_coins(sprite.value)   # coins collected  #change
             Particle(self.particle_surfs, sprite.rect.center, self.all_sprites)
 
     def get_damage(self):
@@ -137,14 +143,26 @@ class Level:
             self.player.damage()
             self.bg_music.stop()
             
-            # self.gameover.run(dt=0)
+            # self.gameover.run(dt=0)  #change
             #self.player.kill()
             pygame.quit()
             exit()
 
+    # killing the tooth if the player jumps on it
+    def zombie_kill(self):  #change
+        zombie_sprites=pygame.sprite.spritecollide(self.player, self.killable_sprites, False)
+        if zombie_sprites:
+            for zombie in zombie_sprites:
+                self.zombie_center=zombie.rect.centery
+                self.zombie_top=zombie.rect.top
+                self.player_bottom=self.player.rect.bottom
+                if self.zombie_top<self.player_bottom<self.zombie_center and self.player.direction.y >=0:
+                    self.player.direction.y = -2
+                    zombie.kill()
+
     # #if player falls off ground
-    # def check_death(self):
-    # 	if self.player.rect.top > WINDOW_HEIGHT:
+    # def check_death(self): #change
+    # 	if self.player.rect.top > WINDOW_HEIGHT-300:
     # 		self.bg_music.stop()
     # 		self.gameover.run(dt=0)
             # pygame.quit()
@@ -251,6 +269,7 @@ class Level:
         self.event_loop()
         self.all_sprites.update(dt)
         self.get_coins()
+        self.zombie_kill() #change
         self.get_damage()
         # self.check_death()
         # self.check_win()

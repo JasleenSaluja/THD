@@ -64,10 +64,11 @@ class Particle(Animated):
 			self.kill()
 
 class Coin(Animated):
-	def __init__(self, coin_type, assets, pos, group):
+	def __init__(self, coin_type, assets, pos, group,value):  #change
 		super().__init__(assets, pos, group)
 		self.rect = self.image.get_rect(center = pos)
 		self.coin_type = coin_type
+		self.value = value #change
 
 
 # enemies
@@ -95,6 +96,8 @@ class Zombie(Generic):
 		self.speed = 70
 		
 		self.collision_sprites = collision_sprites
+		# self.killable_sprites = killable_sprites  #change
+
 
 		# destory tooth at the beginning if he is not on a floor
 		if not [sprite for sprite in collision_sprites if sprite.rect.collidepoint(self.rect.midbottom + vector(0,10))]:
