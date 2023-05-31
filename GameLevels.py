@@ -19,7 +19,8 @@ class GameLevels:
     def __init__(self, screen_num=4, switch=None,stm=None,stg=None,):
         self.screen_num = screen_num
         self.display_surface = pygame.display.get_surface()
-        self.canvas_data = None
+       
+       
         # download_all_levels()
         self.canvas_objects = pygame.sprite.Group()
         self.foreground = pygame.sprite.Group()
@@ -46,68 +47,7 @@ class GameLevels:
             'jump': pygame.mixer.Sound('audio/jump.wav'),
             'music': pygame.mixer.Sound('audio/SuperHero.ogg'),
         }
-
-    
-
-    def create_grid(self):
-    
-    # add objects to the tiles
-
-        for tile in self.canvas_data.values():
-            tile.objects = []
-
-        for obj in self.canvas_objects:
-            current_cell = self.get_current_cell(obj)
-            offset = vector(obj.distance_to_origin) - (vector(current_cell) * TILE_SIZE)
-
-            if current_cell in self.canvas_data: # tile exists already
-                self.canvas_data[current_cell].add_id(obj.tile_id, offset)
-            else: # no tile exists yet 
-                self.canvas_data[current_cell] = CanvasTile(obj.tile_id, offset)
-
-        # create an empty grid
-        layers = {
-            'water': {},
-            'obstacle': {},
-            'terrain': {}, 
-            'enemies': {},
-            'coins': {}, 
-            'fg objects': {},
-        }
-
-        # grid offset 
-        left = sorted(self.canvas_data.keys(), key = lambda tile: tile[0])[0][0]
-        top = sorted(self.canvas_data.keys(), key = lambda tile: tile[1])[0][1]
-
-        # fill the grid
-        for tile_pos, tile in self.canvas_data.items():
-            row_adjusted = tile_pos[1] - top
-            col_adjusted = tile_pos[0] - left
-            x = col_adjusted * TILE_SIZE
-            y = row_adjusted * TILE_SIZE
-
-            if tile.has_water:
-                layers['water'][(x,y)] = tile.get_water()
-
-            if tile.has_terrain:
-                layers['terrain'][(x,y)] = tile.get_terrain() if tile.get_terrain() in self.land_tiles else 'X'
-
-            if tile.coin:
-                layers['coins'][(x + TILE_SIZE // 2,y + TILE_SIZE // 2)] = tile.coin
-
-            if tile.enemy:
-                layers['enemies'][x,y] = tile.enemy
-
-            if tile.objects: # (obj, offset)
-                for obj, offset in tile.objects:
-                    if obj in [key for key, value in EDITOR_DATA.items() if value['style'] == 'obstacle']: # bg palm
-                        layers['obstacle'][(int(x + offset.x), int(y + offset.y))] = obj
-                    else: # fg objects
-                        layers['fg objects'][(int(x + offset.x), int(y + offset.y))] = obj
-
-        return layers
-
-        
+   
     def imports(self):
         #background
         self.background_2=load('graphics/screen_3.png').convert_alpha()
@@ -154,6 +94,9 @@ class GameLevels:
             'music': pygame.mixer.Sound('audio/SuperHero.ogg'),
         }
         
+    
+    def setup_levels(self):
+        self.level_buttons = []
         for level in os.listdir('levels'):
             x= 282
             y= 433
@@ -176,9 +119,9 @@ class GameLevels:
                     level_file = f'levels/{levelDict["level"]}'
                     print(f'level => {levelDict["level"]}')
                     with open(level_file, 'rb') as f:
-                        self.canvas_data = pickle.load(f)
+                        self.grid = pickle.load(f)
                         # print(self.canvas_data)
-                        self.switch(self.create_grid())
+                        self.switch(self.grid)
                 else:
                     if self.pressed==True:
                         print('click')

@@ -149,13 +149,13 @@ class Editor:
                 return sprite
             
 
-    def save_grid_to_file(self,level_name='level_1'): #new
+    def save_grid_to_file(self,grid,level_name='level_1'): #new
         now = datetime.strftime(datetime.now(), '_%Y_%m_%d_%H_%M_%S') #new
         path=f'levels/{level_name}{now}.game'              #new
         level_name = f'{level_name}{now}'                  #new
 
         with open(path,'wb') as f:                    #new
-            pickle.dump(self.canvas_data,f)           #new
+            pickle.dump(grid,f)           #new
             upload_file(level_name, path)                         #new            
 
     def load_grid_from_file(self,level_name='level_1'):  #new
@@ -166,7 +166,10 @@ class Editor:
     def create_grid(self):
         
         # add objects to the tiles
-
+        print('editor')
+        for obj in self.canvas_objects:
+            current_cell = self.get_current_cell(obj)
+            print("cell",current_cell,"obj", obj.rect.topleft)
         for tile in self.canvas_data.values():
             tile.objects = []
 
@@ -229,7 +232,7 @@ class Editor:
                 sys.exit()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                 self.editor_music.stop()
-                self.save_grid_to_file()  #new
+                self.save_grid_to_file(self.create_grid())  #new
                 self.screen_num = 4
                 self.switch()
             

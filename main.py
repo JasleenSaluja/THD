@@ -29,6 +29,7 @@ class Main:
 		self.gamemenu = GameMenu(self.screen_num, self.switch_to_editor, self.switch_to_level)
 		self.editor = Editor(self.land_tiles, self.switch_to_level, self.screen_num)
 		self.gamelevels=GameLevels(self.screen_num, self.switch, self.switchToMenu)
+		self.gamelevels.setup_levels()
 		surf = load('graphics/cursors/mouse.png').convert_alpha()
 		cursor = pygame.cursors.Cursor((0,0), surf)
 		pygame.mouse.set_cursor(cursor)
@@ -107,7 +108,8 @@ class Main:
 		if grid:
 			self.level = Level(
 				grid, 
-				self.switch,{
+				self.switch,
+				{
 					'land': self.land_tiles,
 					'water bottom': self.water_bottom,
 					'water top': self.water_top_animation,
@@ -121,15 +123,16 @@ class Main:
 					'shell': self.shell,
 					'player': self.player_graphics,
 					'pearl': self.pearl,
-					'clouds': self.clouds},
+					'clouds': self.clouds
+				},
 				self.level_sounds)
 		else:
-			pass
+			self.screen_num = 2
 			
 	def run(self):
 		while True:
 			dt = self.clock.tick() / 1000
-			print(f'dt: {dt}, screen = {self.screen_num}')
+			self.transition.display(dt)
 			if self.screen_num == 1:
 				self.launcher.run(dt)
 			elif self.screen_num == 2:
@@ -140,7 +143,6 @@ class Main:
 				self.gamelevels.run(dt)	
 			elif self.screen_num == 5:
 				self.level.run(dt)
-			self.transition.display(dt)
 			pygame.display.update()
 
 
