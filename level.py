@@ -142,13 +142,12 @@ class Level:
             pygame.quit()
             exit()
 
-    # #if player falls off ground
-    # def check_death(self):
-    # 	if self.player.rect.top > WINDOW_HEIGHT:
-    # 		self.bg_music.stop()
-    # 		self.gameover.run(dt=0)
-            # pygame.quit()
-            # exit()
+    #if player falls off ground
+    def check_death(self):
+        if self.player.rect.top > WINDOW_HEIGHT:
+            self.bg_music.stop()
+            self.gameover.run(dt=0)
+            self.switch()
 
 
     #player wins- if the player collides with the win board
@@ -214,10 +213,8 @@ class Level:
                         layers['obstacle'][(int(x + offset.x), int(y + offset.y))] = obj
                     else: # fg objects
                         layers['fg objects'][(int(x + offset.x), int(y + offset.y))] = obj
-
         return layers
-
-            
+     
     def event_loop(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

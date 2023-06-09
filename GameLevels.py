@@ -16,12 +16,10 @@ from firbase import download_all_levels
 from editor import CanvasTile
 
 class GameLevels:
-    def __init__(self, screen_num=4, switch=None,stm=None,stg=None,):
+    def __init__(self, screen_num=4, switch=None,stm=None):
         self.screen_num = screen_num
         self.display_surface = pygame.display.get_surface()
        
-       
-        # download_all_levels()
         self.canvas_objects = pygame.sprite.Group()
         self.foreground = pygame.sprite.Group()
         self.background = pygame.sprite.Group()
@@ -47,6 +45,7 @@ class GameLevels:
             'jump': pygame.mixer.Sound('audio/jump.wav'),
             'music': pygame.mixer.Sound('audio/SuperHero.ogg'),
         }
+        self.setup_levels()
    
     def imports(self):
         #background
@@ -54,7 +53,6 @@ class GameLevels:
 
         #level button
         self.level_buttons = []
-            
     
         #exit button
         self.back_button=load('graphics/buttons/back_button.png').convert_alpha()
@@ -133,7 +131,7 @@ class GameLevels:
             if pygame.mouse.get_pressed()[0]:
                 self.screen_num=2
                 self.pressed=True
-                self.switchToMenu
+                self.switchToMenu()
             else:
                 if self.pressed==True:
                     print('click')
@@ -160,16 +158,19 @@ class GameLevels:
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    for levelDict in self.level_buttons:
-                        print(levelDict)
-                        if levelDict['rect'].collidepoint(self.mouse_pos):
+                try:
+                    if event.button == 1:
+                        for levelDict in self.level_buttons:
+                            print(levelDict)
+                            if levelDict['rect'].collidepoint(self.mouse_pos):
+                                self.launcher_music.stop()
+                            
+                        if self.back_button_rect.collidepoint(self.mouse_pos):
                             self.launcher_music.stop()
-                        
-                    if self.back_button_rect.collidepoint(self.mouse_pos):
-                        self.launcher_music.stop()
-                        # self.switch()
-                print(self.mouse_pos)
+                            # self.switch()
+                        print(self.mouse_pos)
+                except Exception as e:
+                    print(e)
                 
 
            
@@ -177,6 +178,7 @@ class GameLevels:
     
     def update(self):
         self.mouse_pos = mouse_pos()
+        self.setup_levels()
         
 
     def draw(self):

@@ -28,8 +28,7 @@ class Main:
 		self.launcher = Launcher(self.screen_num, 10, self.switchToMenu)
 		self.gamemenu = GameMenu(self.screen_num, self.switch_to_editor, self.switch_to_level)
 		self.editor = Editor(self.land_tiles, self.switch_to_level, self.screen_num)
-		self.gamelevels=GameLevels(self.screen_num, self.switch, self.switchToMenu)
-		self.gamelevels.setup_levels()
+		self.gamelevels=GameLevels(self.screen_num, self.switch, stm=self.switchToMenu)
 		surf = load('graphics/cursors/mouse.png').convert_alpha()
 		cursor = pygame.cursors.Cursor((0,0), surf)
 		pygame.mouse.set_cursor(cursor)
@@ -80,11 +79,10 @@ class Main:
 			if self.editor_active:
 				self.editor.editor_music.play()		
 		elif self.screen_num == 4:
-			pass
+			self.gamelevels=GameLevels(self.screen_num, self.switch, self.switchToMenu)
 		elif self.screen_num == 5:
 			self.level.bg_music.play()
 		
-
 	def switchToMenu(self):
 		print("switching to menu")
 		self.screen_num = 2
