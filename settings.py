@@ -26,10 +26,10 @@ EDITOR_DATA = {
 	13: {'style': 'palm_fg', 'type': 'object', 'menu': 'palm fg', 'menu_surf': 'graphics/menu/skeleton.png',  'preview': 'graphics/preview/skeleton.png',  'graphics': 'graphics/terrain/obstacles/skeleton'},
 	14: {'style': 'palm_fg', 'type': 'object', 'menu': 'palm fg', 'menu_surf': 'graphics/menu/crate.png', 'preview': 'graphics/preview/crate.png', 'graphics': 'graphics/terrain/obstacles/crate'},
 
-	15: {'style': 'obstacle', 'type': 'object', 'menu': 'obstacle', 'menu_surf': 'graphics/menu/small_bg.png', 'preview': 'graphics/preview/small_bg.png', 'graphics': 'graphics/terrain/obstacles/small_bg'},
-	16: {'style': 'obstacle', 'type': 'object', 'menu': 'obstacle', 'menu_surf': 'graphics/menu/large_bg.png', 'preview': 'graphics/preview/large_bg.png', 'graphics': 'graphics/terrain/obstacles/large_bg'},
-	17: {'style': 'obstacle', 'type': 'object', 'menu': 'obstacle', 'menu_surf': 'graphics/menu/left_bg.png',  'preview': 'graphics/preview/left_bg.png',  'graphics': 'graphics/terrain/obstacles/left_bg'},
-	18: {'style': 'obstacle', 'type': 'object', 'menu': 'obstacle', 'menu_surf': 'graphics/menu/right_bg.png', 'preview': 'graphics/preview/right_bg.png', 'graphics': 'graphics/terrain/obstacles/right_bg'},
+	15: {'style': 'obstacle', 'type': 'object', 'menu': 'obstacle', 'menu_surf': 'graphics/menu/win_board.png', 'preview': 'graphics/preview/win_board.png', 'graphics': 'graphics/terrain/obstacles/small_bg'},
+	16: {'style': 'obstacle', 'type': 'object', 'menu': 'obstacle', 'menu_surf': 'graphics/menu/win_board.png', 'preview': 'graphics/preview/win_board.png', 'graphics': 'graphics/terrain/obstacles/large_bg'},
+	17: {'style': 'obstacle', 'type': 'object', 'menu': 'obstacle', 'menu_surf': 'graphics/menu/win_board.png',  'preview': 'graphics/preview/win_board.png',  'graphics': 'graphics/terrain/obstacles/left_bg'},
+	18: {'style': 'obstacle', 'type': 'object', 'menu': 'obstacle', 'menu_surf': 'graphics/menu/win_board.png', 'preview': 'graphics/preview/win_board.png', 'graphics': 'graphics/terrain/obstacles/right_bg'},
 }
 
 NEIGHBOR_DIRECTIONS = {

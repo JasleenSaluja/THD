@@ -28,7 +28,7 @@ class Main:
 		self.editor_active = False
 		self.transition = Transition(self.toggle)
 
-		self.launcher = Launcher(self.screen_num, 10, self.switchToMenu)
+		self.launcher = Launcher(self.screen_num, 600, self.switchToMenu)
 		self.gamemenu = GameMenu(self.screen_num, self.switch_to_editor, self.switch_to_level)
 		self.editor = Editor(self.land_tiles, self.switch_to_level, self.screen_num)
 		self.gamelevels=GameLevels(self.screen_num, self.switch, self.switchToMenu)

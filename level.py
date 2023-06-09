@@ -24,6 +24,7 @@ class Level:
         self.shell_sprites = pygame.sprite.Group()
         self.killable_sprites = pygame.sprite.Group() #change
         self.win_sprites = pygame.sprite.Group() #change
+        
 
         #gameover and gamewin screen
         self.gameover=GameOver() #change
@@ -136,6 +137,19 @@ class Level:
             self.change_coins(sprite.value)   # coins collected  #change
             Particle(self.particle_surfs, sprite.rect.center, self.all_sprites)
 
+
+    # killing the tooth if the player jumps on it
+    def zombie_kill(self):  #change
+        zombie_sprites=pygame.sprite.spritecollide(self.player, self.killable_sprites, False)
+        if zombie_sprites:
+            for zombie in zombie_sprites:
+                self.zombie_center=zombie.rect.centery
+                self.zombie_top=zombie.rect.top
+                self.player_bottom=self.player.rect.bottom
+                if self.zombie_top<self.player_bottom<self.zombie_center and self.player.direction.y >=0:
+                    self.player.direction.y = -2
+                    zombie.kill()        
+    
     def get_damage(self):
         collision_sprites = pygame.sprite.spritecollide(self.player, self.damage_sprites, False, pygame.sprite.collide_mask)
         if collision_sprites:
@@ -159,12 +173,12 @@ class Level:
 
 
     #player wins- if the player collides with the win board
-    # def check_win(self):#change
-    # 	if pygame.sprite.spritecollide(self.player, self.win_sprites,True):
-    # 		self.bg_music.stop()
-    # 		self.gamewin.run(dt=0)
-            # pygame.quit()
-            # exit()
+    def check_win(self):#change
+        if pygame.sprite.spritecollide(self.player, self.win_sprites,True):
+            self.bg_music.stop()
+            self.gamewin.run(dt=0)
+            pygame.quit()
+            exit()
 
     def create_grid(self):
         
@@ -256,10 +270,10 @@ class Level:
         self.event_loop()
         self.all_sprites.update(dt)
         self.get_coins()
-        # self.zombie_kill() #change
+        self.zombie_kill() #change
         self.get_damage()
         self.check_death()
-        # self.check_win()
+        self.check_win()
 
         # drawing
         self.display_surface.fill(SKY_COLOR)
