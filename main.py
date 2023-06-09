@@ -12,6 +12,7 @@ from GameMenu import GameMenu
 from GameLevels import GameLevels	
 
 from os import walk
+from ui import UI #change
 
 class Main:
 
@@ -23,15 +24,27 @@ class Main:
 		pygame.display.set_caption('The Hungry Dead')
 		self.clock = pygame.time.Clock()
 		self.imports()
+		
 		self.editor_active = False
 		self.transition = Transition(self.toggle)
+
 		self.launcher = Launcher(self.screen_num, 10, self.switchToMenu)
 		self.gamemenu = GameMenu(self.screen_num, self.switch_to_editor, self.switch_to_level)
 		self.editor = Editor(self.land_tiles, self.switch_to_level, self.screen_num)
-		self.gamelevels=GameLevels(self.screen_num, self.switch, stm=self.switchToMenu)
+		self.gamelevels=GameLevels(self.screen_num, self.switch, self.switchToMenu)
+
+
+		#cursor
 		surf = load('graphics/cursors/mouse.png').convert_alpha()
 		cursor = pygame.cursors.Cursor((0,0), surf)
 		pygame.mouse.set_cursor(cursor)
+
+		#no. of coins
+		self.coins_collected=0 #change
+		
+		#user interface
+		self.ui=UI(self.display_surface) #change 
+
 
 	def imports(self):
 		# terrain
@@ -123,9 +136,14 @@ class Main:
 					'pearl': self.pearl,
 					'clouds': self.clouds
 				},
-				self.level_sounds)
+				self.level_sounds,
+				self.change_coins)  #change
 		else:
 			self.screen_num = 2
+
+
+	def change_coins(self,amount):#change
+		self.coins_collected+=amount #change
 			
 	def run(self):
 		while True:
@@ -141,6 +159,7 @@ class Main:
 				self.gamelevels.run(dt)	
 			elif self.screen_num == 5:
 				self.level.run(dt)
+				self.ui.show_coins(self.coins_collected) #change
 			pygame.display.update()
 
 
