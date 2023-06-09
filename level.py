@@ -142,18 +142,20 @@ class Level:
             self.hit_sound.play()
             self.player.damage()
             self.bg_music.stop()
-            
+            self.switch()
+            self.bg_music.stop()
             # self.gameover.run(dt=0)  #change
             #self.player.kill()
-            pygame.quit()
-            exit()
+            # pygame.quit()
+            # exit()
 
     #if player falls off ground
     def check_death(self):
         if self.player.rect.top > WINDOW_HEIGHT:
             self.bg_music.stop()
-            self.gameover.run(dt=0)
+            #self.gameover.run(dt=0)
             self.switch()
+            self.bg_music.stop()
 
 
     #player wins- if the player collides with the win board
@@ -254,9 +256,9 @@ class Level:
         self.event_loop()
         self.all_sprites.update(dt)
         self.get_coins()
-        self.zombie_kill() #change
+        # self.zombie_kill() #change
         self.get_damage()
-        # self.check_death()
+        self.check_death()
         # self.check_win()
 
         # drawing
